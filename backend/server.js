@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 mongoose
-  .connect(dbConfig.url)
+  .connect(`${dbConfig.url}/FullStack-Test`)
   .then(() => {
     console.log("Successfully connected to the database");
   })
@@ -31,7 +31,8 @@ app.get("/", (req, res) => {
   });
 });
 
-require("./routes/car.routes")(app);
+require("./routes/accounts.routes")(app);
+require("./routes/operation.routes")(app);
 
 app.listen(serverConnections.port, () => {
   console.log(`Server is listening on port ${serverConnections.port}`);

@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="form-conatiner">
+        <form class="example-container">
+            <mat-form-field appearance="standard">
+                <mat-label>Enter an accuont number</mat-label>
+                <input matInput placeholder="1234567" [formControl]="accuontNum" required>
+                <mat-error *ngIf="accuontNum.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="getAccuontDetails()">Submit</button>
+        </form>
+    </div>
+
+    <div *ngFor="let operation of accuontOperations" class="cards-container">
+        <mat-card class="example-card">
+            <mat-card-title-group>
+                <mat-card-title>{{operation.type}}</mat-card-title>
+            </mat-card-title-group>
+            <mat-card-content>
+                <b>Amount:</b>{{operation.amount}} $
+                <b>Operation Date:</b>{{operation.operationDate}}
+                <ng-container *ngIf="operation.type === 'loan'">
+                    <b>Number of payments:</b>{{operation.payments}}
+                    <b>Interest value:</b>{{operation.interest}}
+                </ng-container>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>
