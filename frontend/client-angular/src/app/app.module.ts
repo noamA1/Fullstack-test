@@ -11,6 +11,8 @@ import { HomeComponent } from './components/home/home.component';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
 import { OperationFormComponent } from './components/operation-form/operation-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClientFormComponent } from './components/client-form/client-form.component';
+import { AccuontsComponent } from './components/accuonts/accuonts.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HomeComponent,
     AccountDetailsComponent,
     OperationFormComponent,
+    ClientFormComponent,
+    AccuontsComponent,
   ],
   imports: [
     BrowserModule,

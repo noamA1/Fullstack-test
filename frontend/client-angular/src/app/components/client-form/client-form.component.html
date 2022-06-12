@@ -1,0 +1,39 @@
+<mat-card class="example-card">
+    <mat-card-title-group>
+        <mat-card-title>{{title}}</mat-card-title>
+    </mat-card-title-group>
+    <mat-card-content>
+        <div [formGroup]="accountForm">
+            <mat-form-field appearance="standard">
+                <mat-label>Enter client ID number</mat-label>
+                <input matInput type="number" [(ngModel)]="clientId" formControlName="id" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-label>Enter an accuont number</mat-label>
+                <input matInput type="number" [(ngModel)]="accuontNum" formControlName="account" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-label>Enter client first name</mat-label>
+                <input matInput [(ngModel)]="firstName" formControlName="fName" required>
+
+            </mat-form-field>
+
+
+            <mat-form-field appearance="standard">
+                <mat-label>Enter client last name</mat-label>
+                <input matInput [(ngModel)]="lastName" formControlName="lName" required>
+
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-label>Enter client phone number</mat-label>
+                <input matInput type="tel" formControlName="tel" [(ngModel)]="phoneNumber" required>
+                <mat-icon matSuffix>phone</mat-icon>
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="addAccuont()">Submit</button>
+        </div>
+    </mat-card-content>
+</mat-card>

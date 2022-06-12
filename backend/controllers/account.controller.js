@@ -26,8 +26,10 @@ exports.create = (req, res) => {
     clientID: req.body.clientID,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
+    accountNumber: req.body.accountNumber,
     phoneNumber: !req.body.phoneNumber ? "" : req.body.phoneNumber,
   });
+  // console.log(req.);
 
   // Save Note in the database
   account
@@ -108,6 +110,7 @@ exports.update = (req, res) => {
       clientID: req.body.clientID,
       firstName: req.body.firstName,
       lastName: req.body.lastName,
+      accountNumber: req.body.accountNumber,
       phoneNumber: !req.body.phoneNumber ? "" : req.body.phoneNumber,
     },
     { new: true }
