@@ -1,3 +1,5 @@
+import { NotificationService } from './../../services/notification.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Account } from './../../models/account';
 import { AccountService } from './../../services/account.service';
@@ -9,7 +11,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./accuonts.component.css'],
 })
 export class AccuontsComponent implements OnInit {
-  constructor(private accountService: AccountService, private router: Router) {}
+  constructor(
+    private accountService: AccountService,
+    private router: Router,
+    private notificationSer: NotificationService
+  ) {}
 
   dataSource: Account[] = [];
   displayedColumns: string[] = [
@@ -32,7 +38,10 @@ export class AccuontsComponent implements OnInit {
 
   delAccount(id: String) {
     this.accountService.deleteClient(id).subscribe((result) => {
-      console.log(result);
+      this.notificationSer.showSnackBar(
+        'Client account was deleted successfully',
+        'danger-snackbar'
+      );
       this.getAllAccounts();
     });
   }

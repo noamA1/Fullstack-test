@@ -1,3 +1,5 @@
+import { NotificationService } from './../../services/notification.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Account } from './../../models/account';
 import { AccountService } from './../../services/account.service';
@@ -52,7 +54,8 @@ export class ClientFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private accountSer: AccountService,
-    private router: Router
+    private router: Router,
+    private notificationSer: NotificationService
   ) {}
 
   getErrorMessage(key: string) {
@@ -109,12 +112,20 @@ export class ClientFormComponent implements OnInit {
       this.accountSer
         .updateClient(this.docId, this.clientAccount)
         .subscribe((result) => {
-          console.log(result);
+          this.notificationSer.showSnackBar(
+            'The client account was successfully update',
+            'info-snackbar'
+          );
         });
     } else {
       this.accountSer
         .addNewClient(this.clientAccount)
-        .subscribe((result) => console.log(result));
+        .subscribe((result) =>
+          this.notificationSer.showSnackBar(
+            'The client account was successfully created',
+            'success-snackbar'
+          )
+        );
     }
     this.router.navigate(['/accounts']);
   }

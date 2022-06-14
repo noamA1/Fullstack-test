@@ -1,8 +1,10 @@
+import { NotificationService } from './../../services/notification.service';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { OperationService } from './../../services/operation.service';
 import { Operation } from './../../models/operation';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-operation-form',
@@ -16,7 +18,8 @@ export class OperationFormComponent implements OnInit {
   constructor(
     private operationService: OperationService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notificationSer: NotificationService
   ) {}
 
   operationForm = this.fb.group({
@@ -109,7 +112,10 @@ export class OperationFormComponent implements OnInit {
     this.operationService
       .addNewOperation(this.newOperation)
       .subscribe((result) => {
-        console.log(result);
+        this.notificationSer.showSnackBar(
+          'The operation added successfully',
+          'success-snackbar'
+        );
         this.router.navigateByUrl('');
       });
   }
