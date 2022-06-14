@@ -27,7 +27,6 @@ export class AccuontsComponent implements OnInit {
   getAllAccounts() {
     this.accountService.getAll().subscribe((resultArray) => {
       this.dataSource = resultArray;
-      console.log(this.dataSource);
     });
   }
 

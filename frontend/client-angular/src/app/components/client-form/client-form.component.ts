@@ -66,7 +66,6 @@ export class ClientFormComponent implements OnInit {
   }
 
   messageForPatternValidation(key: string): string {
-    console.log(key);
     let message = '';
     switch (key) {
       case 'id':
@@ -117,5 +116,6 @@ export class ClientFormComponent implements OnInit {
         .addNewClient(this.clientAccount)
         .subscribe((result) => console.log(result));
     }
+    this.router.navigate(['/accounts']);
   }
 }

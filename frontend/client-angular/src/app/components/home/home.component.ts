@@ -1,7 +1,8 @@
 import { OperationService } from './../../services/operation.service';
 import { Operation } from './../../models/operation';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { formatNumber } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -14,13 +15,15 @@ export class HomeComponent implements OnInit {
     Validators.minLength(6),
     Validators.maxLength(6),
     Validators.pattern('^[0-9]*$'),
-
-    // Validators.compose.arguments(Number),
   ]);
+  balance: number = 0;
 
   accuontOperations: Operation[] = [];
 
-  constructor(private operationService: OperationService) {}
+  constructor(
+    private operationService: OperationService,
+    @Inject(LOCALE_ID) public locale: string
+  ) {}
 
   getErrorMessage() {
     if (this.accuontNum.hasError('required')) {
@@ -34,14 +37,26 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  calculateBalance() {
+    this.accuontOperations.forEach((operation) => {
+      operation.type === 'cash withdrawal'
+        ? (this.balance -= +operation.amount)
+        : (this.balance += +operation.amount);
+    });
+  }
+
+  formatAmountNumber(amount: number) {
+    return formatNumber(amount, this.locale);
+  }
+
   getAccuontDetails() {
-    let tempArray: Operation[] = [];
-    console.log(this.accuontNum);
     this.operationService.getOperations().subscribe((operationAR) => {
       this.accuontOperations = operationAR.filter(
         (operation) => operation.accountNumber === +this.accuontNum.value
       );
+      this.calculateBalance();
     });
   }
+
   ngOnInit(): void {}
 }

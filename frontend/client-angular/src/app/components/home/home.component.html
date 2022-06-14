@@ -1,28 +1,50 @@
 <div class="container">
     <div class="form-conatiner">
         <form class="example-container">
+            <h3 class="header">
+                Enter an account number to see all operations
+            </h3>
             <mat-form-field appearance="standard">
                 <mat-label>Enter an accuont number</mat-label>
                 <input matInput placeholder="1234567" [formControl]="accuontNum" required>
                 <mat-error *ngIf="accuontNum.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="getAccuontDetails()">Submit</button>
+            <button mat-raised-button color="primary" (click)="getAccuontDetails()">Show</button>
         </form>
     </div>
+    <mat-card *ngIf="balance" class="balance-card">
+        <mat-card-title class="card-title">Account Balance</mat-card-title>
+        <mat-card-content [ngClass]="{
+            'positive': balance > 0 ,
+            'negative': balance < 0}">{{formatAmountNumber(balance) }} &#x20AA;</mat-card-content>
+    </mat-card>
 
-    <div *ngFor="let operation of accuontOperations" class="cards-container">
-        <mat-card class="example-card">
-            <mat-card-title-group>
-                <mat-card-title>{{operation.type}}</mat-card-title>
-            </mat-card-title-group>
-            <mat-card-content>
-                <b>Amount:</b>{{operation.amount}} $
-                <b>Operation Date:</b>{{operation.operationDate}}
-                <ng-container *ngIf="operation.type === 'loan'">
-                    <b>Number of payments:</b>{{operation.payments}}
-                    <b>Interest value:</b>{{operation.interest}}
-                </ng-container>
-            </mat-card-content>
-        </mat-card>
+    <div class="cards-container">
+        <div *ngFor="let operation of accuontOperations">
+            <mat-card class="example-card">
+                <mat-card-title-group>
+                    <mat-card-title class="card-title">{{operation.type}}</mat-card-title>
+                </mat-card-title-group>
+                <hr />
+                <mat-card-content>
+                    <div class="amount-div">
+                        <b>Amount: &nbsp;</b>
+                        <sapn class="amount-span" [ngClass]="{
+                            'positive' : (operation.type === 'cash deposit' || operation.type === 'loan') ,
+                            'negative' : operation.type === 'cash withdrawal'}">
+                            {{formatAmountNumber(+operation.amount)}} &#x20AA;
+                            <mat-icon>
+                                {{operation.type === 'cash withdrawal' ? "trending_down" : "trending_up"}}</mat-icon>
+                        </sapn>
+                    </div>
+
+                    <span> <b>Operation Date:&nbsp;</b>{{operation.operationDate | date:'dd/MM/yyyy'}}</span>
+                    <ng-container *ngIf="operation.type === 'loan'">
+                        <span><b>Payments: &nbsp;</b>{{operation.payments}} per month</span>
+                        <span><b>Interest value: &nbsp;</b> {{operation.interest}} &#x25;</span>
+                    </ng-container>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
 </div>

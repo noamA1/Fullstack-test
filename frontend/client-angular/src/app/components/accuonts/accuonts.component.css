@@ -1,9 +1,9 @@
 table {
   width: 100%;
 }
-
-.add-btn {
-  /* right: 100px; */
+.mat-header-cell {
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .button-continer {

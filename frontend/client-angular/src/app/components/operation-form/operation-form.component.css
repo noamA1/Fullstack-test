@@ -13,3 +13,21 @@ mat-card-content {
 mat-form-field {
   width: 100%;
 }
+
+.card-header {
+  background: linear-gradient(
+    to right bottom,
+    rgba(151, 117, 250, 1) 0%,
+    rgba(116, 143, 252, 1) 100%
+  );
+  color: transparent;
+  background-clip: text;
+  /* font-style: italic; */
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+mat-hint,
+mat-error {
+  margin: 5px;
+}

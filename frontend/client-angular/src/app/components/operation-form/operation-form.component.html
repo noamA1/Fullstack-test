@@ -1,6 +1,6 @@
 <mat-card class="example-card">
     <mat-card-title-group>
-        <mat-card-title>Add new operation</mat-card-title>
+        <mat-card-title class="card-header">Add new operation</mat-card-title>
     </mat-card-title-group>
     <mat-card-content>
         <div [formGroup]="operationForm">
@@ -44,9 +44,11 @@
                 </mat-form-field>
 
             </ng-container>
-            <button mat-raised-button color="primary" [disabled]="operationForm.invalid"
-                (click)="addOperation()">Submit</button>
-            <button mat-flat-button routerLink="/">Cancel</button>
         </div>
     </mat-card-content>
+    <mat-card-actions>
+        <button mat-flat-button color="primary" [disabled]="operationForm.invalid"
+            (click)="addOperation()">Submit</button>
+        <button mat-flat-button routerLink="/">Cancel</button>
+    </mat-card-actions>
 </mat-card>
