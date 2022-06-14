@@ -13,6 +13,7 @@ import { OperationFormComponent } from './components/operation-form/operation-fo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClientFormComponent } from './components/client-form/client-form.component';
 import { AccuontsComponent } from './components/accuonts/accuonts.component';
+import { CardComponent } from './components/card/card.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { AccuontsComponent } from './components/accuonts/accuonts.component';
     OperationFormComponent,
     ClientFormComponent,
     AccuontsComponent,
+    CardComponent,
   ],
   imports: [
     BrowserModule,

@@ -15,12 +15,8 @@ export class OperationService {
   }
 
   addNewOperation(newOperation: Operation): Observable<Operation> {
-    console.log(newOperation);
     return this.http.post<Operation>(this.URL, newOperation);
   }
-  // updateCar(id: String, car: Car): Observable<Car> {
-  //   return this.http.put<Car>(`${this.URL}/${id}`, car);
-  // }
 
   // getCar(id: string): Observable<Car> {
   //   return this.http.get<Car>(`${this.URL}/${id}`);

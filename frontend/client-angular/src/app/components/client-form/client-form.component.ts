@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { Account } from './../../models/account';
 import { AccountService } from './../../services/account.service';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-client-form',
@@ -21,11 +21,32 @@ export class ClientFormComponent implements OnInit {
   editMode: boolean = false;
 
   accountForm = this.fb.group({
-    tel: [''],
-    id: [''],
-    account: [''],
-    fName: [''],
-    lName: [''],
+    tel: [
+      '',
+      [
+        Validators.required,
+        Validators.pattern('[0-9]{3}-[0-9]{7}'),
+        Validators.maxLength(11),
+      ],
+    ],
+    id: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(9),
+        Validators.pattern('[0-9]{9}'),
+      ],
+    ],
+    account: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(6),
+        Validators.pattern('[0-9]{6}'),
+      ],
+    ],
+    fName: ['', [Validators.required]],
+    lName: ['', [Validators.required]],
   });
 
   constructor(
@@ -34,9 +55,37 @@ export class ClientFormComponent implements OnInit {
     private router: Router
   ) {}
 
+  getErrorMessage(key: string) {
+    if (this.accountForm.get(key)?.errors?.['required']) {
+      return 'You must enter a value';
+    }
+    if (this.accountForm.get(key)?.errors?.['pattern']) {
+      return this.messageForPatternValidation(key);
+    }
+    return;
+  }
+
+  messageForPatternValidation(key: string): string {
+    console.log(key);
+    let message = '';
+    switch (key) {
+      case 'id':
+        message = 'The id number must contain 9 digits and numbers only';
+        break;
+      case 'account':
+        message = 'The account number must contain 6 digits and numbers only';
+        break;
+
+      case 'tel':
+        message = 'The phone number must be in the format 050-1234567';
+        break;
+    }
+    return message;
+  }
+
   ngOnInit(): void {
     const url = this.router.url;
-    console.log(window.history.state.account.clientID);
+
     if (url.endsWith('edit')) {
       this.editMode = true;
       this.title = 'Edit Client Account';
@@ -68,7 +117,5 @@ export class ClientFormComponent implements OnInit {
         .addNewClient(this.clientAccount)
         .subscribe((result) => console.log(result));
     }
-    // console.log(this.accountForm.value);
-    // console.log(typeof this.accountForm.value.accuont);
   }
 }

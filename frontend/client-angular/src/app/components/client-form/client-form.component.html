@@ -7,33 +7,38 @@
             <mat-form-field appearance="standard">
                 <mat-label>Enter client ID number</mat-label>
                 <input matInput type="number" [(ngModel)]="clientId" formControlName="id" required>
+                <mat-error *ngIf="accountForm.get('id')?.errors">{{getErrorMessage("id")}}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="standard">
                 <mat-label>Enter an accuont number</mat-label>
                 <input matInput type="number" [(ngModel)]="accuontNum" formControlName="account" required>
+                <mat-error *ngIf="accountForm.get('account')?.errors">{{getErrorMessage("account")}}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="standard">
                 <mat-label>Enter client first name</mat-label>
                 <input matInput [(ngModel)]="firstName" formControlName="fName" required>
-
+                <mat-error *ngIf="accountForm.get('fName')?.errors">{{getErrorMessage("fName")}}</mat-error>
             </mat-form-field>
 
 
             <mat-form-field appearance="standard">
                 <mat-label>Enter client last name</mat-label>
                 <input matInput [(ngModel)]="lastName" formControlName="lName" required>
-
+                <mat-error *ngIf="accountForm.get('lName')?.errors">{{getErrorMessage("lName")}}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="standard">
                 <mat-label>Enter client phone number</mat-label>
                 <input matInput type="tel" formControlName="tel" [(ngModel)]="phoneNumber" required>
                 <mat-icon matSuffix>phone</mat-icon>
+                <mat-error *ngIf="accountForm.get('tel')?.errors">{{getErrorMessage("tel")}}</mat-error>
             </mat-form-field>
 
-            <button mat-raised-button color="primary" (click)="addAccuont()">Submit</button>
+            <button mat-flat-button color="primary" [disabled]="accountForm.invalid"
+                (click)="addAccuont()">Submit</button>
+            <button mat-flat-button routerLink="/accounts">Cancel</button>
         </div>
     </mat-card-content>
 </mat-card>

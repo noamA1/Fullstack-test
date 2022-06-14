@@ -1,3 +1,14 @@
 table {
   width: 100%;
 }
+
+.add-btn {
+  /* right: 100px; */
+}
+
+.button-continer {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}

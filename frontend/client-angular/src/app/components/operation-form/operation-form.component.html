@@ -3,40 +3,50 @@
         <mat-card-title>Add new operation</mat-card-title>
     </mat-card-title-group>
     <mat-card-content>
-        <mat-form-field appearance="standard">
-            <mat-label>Enter an accuont number</mat-label>
-            <input matInput type="number" [(ngModel)]="accuontNum" required>
-        </mat-form-field>
-
-        <mat-form-field appearance="standard">
-            <mat-label>Choose operation type</mat-label>
-            <mat-select [(ngModel)]="type">
-                <mat-option value="Cash withdrawal">Cash withdrawal</mat-option>
-                <mat-option value="Cash deposit">Cash deposit</mat-option>
-                <mat-option value="loan">Loan</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="standard">
-            <mat-label>Enter an Amount</mat-label>
-            <input matInput [(ngModel)]="amount" required>
-
-        </mat-form-field>
-
-        <ng-container *ngIf="type === 'loan'">
+        <div [formGroup]="operationForm">
             <mat-form-field appearance="standard">
-                <mat-label>Enter number of payments</mat-label>
-                <input matInput [(ngModel)]="payments" required>
-
+                <mat-label>Enter an accuont number</mat-label>
+                <input matInput type="number" formControlName="accountNum" required>
+                <mat-error *ngIf="operationForm.get('accountNum')?.errors">{{getErrorMessage("accountNum")}}
+                </mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="standard">
-                <mat-label>Enter interest</mat-label>
-                <input matInput [(ngModel)]="interest" required>
-
+                <mat-label>Choose operation type</mat-label>
+                <mat-select [formControl]="type">
+                    <mat-option value="cash withdrawal">Cash withdrawal</mat-option>
+                    <mat-option value="cash deposit">Cash deposit</mat-option>
+                    <mat-option value="loan">Loan</mat-option>
+                </mat-select>
+                <mat-error *ngIf="type.hasError('required')">
+                    Please choose an operation type</mat-error>
             </mat-form-field>
 
-        </ng-container>
-        <button mat-raised-button color="primary" (click)="addOperation()">Submit</button>
+            <mat-form-field appearance="standard">
+                <mat-label>Enter an Amount</mat-label>
+                <input matInput type="number" formControlName="amount" required>
+                <mat-error *ngIf="operationForm.get('amount')?.errors">{{getErrorMessage("amount")}}</mat-error>
+            </mat-form-field>
+
+            <ng-container *ngIf="type.value === 'loan'">
+                <mat-form-field appearance="standard">
+                    <mat-label>Enter number of payments</mat-label>
+                    <input matInput type="number" formControlName="payments" required>
+                    <mat-error *ngIf="operationForm.get('payments')?.errors">{{getErrorMessage("payments")}}
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="standard">
+                    <mat-label>Enter interest</mat-label>
+                    <input matInput type="number" formControlName="interest" required>
+                    <mat-error *ngIf="operationForm.get('interest')?.errors">{{getErrorMessage("interest")}}
+                    </mat-error>
+                </mat-form-field>
+
+            </ng-container>
+            <button mat-raised-button color="primary" [disabled]="operationForm.invalid"
+                (click)="addOperation()">Submit</button>
+            <button mat-flat-button routerLink="/">Cancel</button>
+        </div>
     </mat-card-content>
 </mat-card>

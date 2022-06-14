@@ -1,13 +1,14 @@
+<div class="button-continer">
+    <button mat-raised-button routerLink="/accounts/add" color="primary" class="add-btn">
+        Add Client Account
+    </button>
+</div>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-
-
-    <!-- Name Column -->
     <ng-container matColumnDef="Client ID">
         <th mat-header-cell *matHeaderCellDef> Client ID </th>
         <td mat-cell *matCellDef="let element"> {{element.clientID}} </td>
     </ng-container>
 
-    <!-- Weight Column -->
     <ng-container matColumnDef="Account number">
         <th mat-header-cell *matHeaderCellDef> Account number </th>
         <td mat-cell *matCellDef="let element"> {{element.accountNumber}} </td>
@@ -36,12 +37,9 @@
             <button (click)="editAccount(element)" mat-icon-button color="primary">
                 <mat-icon>edit</mat-icon>
             </button>
-
         </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-
-\
