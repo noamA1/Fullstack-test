@@ -1,0 +1,17 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.menu-title {
+  color: #000;
+}
+
+button {
+  font-size: 18px;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
