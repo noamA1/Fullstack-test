@@ -1,4 +1,4 @@
-<mat-card class="example-card">
+<mat-card class="example-card card-shadow">
     <mat-card-header>
         <mat-card-title class="card-header">
             Add new user
@@ -22,7 +22,7 @@
             <mat-form-field appearance="standard">
                 <mat-label>Enter user phone number</mat-label>
                 <input matInput type="tel" formControlName="tel" required>
-                <mat-icon matSuffix>phone</mat-icon>
+                <mat-icon class="input-icon" matSuffix>phone</mat-icon>
                 <mat-hint>052-1234567</mat-hint>
                 <mat-error *ngIf="registerForm.get('tel')?.errors">{{getErrorMessage("tel")}}</mat-error>
             </mat-form-field>
@@ -42,7 +42,7 @@
             <mat-form-field appearance="standard">
                 <mat-label>Enter your email</mat-label>
                 <input matInput placeholder="pat@example.com" formControlName="email" required>
-                <mat-icon matSuffix>mail</mat-icon>
+                <mat-icon class="input-icon" matSuffix>mail</mat-icon>
                 <mat-error *ngIf="registerForm.get('email')?.errors">{{getErrorMessage('email')}}</mat-error>
             </mat-form-field>
 
@@ -52,7 +52,8 @@
                     [type]="hide ? 'password' : 'text'">
                 <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                     [attr.aria-pressed]="hide">
-                    <mat-icon style="margin-bottom: 0.5rem">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                    <mat-icon class="input-icon" style="margin-bottom: 0.5rem">{{ hide ? 'visibility_off' : 'visibility'
+                        }}</mat-icon>
                 </button>
                 <mat-hint style="color:#333" align="end">{{ userPassword.value?.length }} / 6</mat-hint>
                 <mat-error *ngIf="registerForm.get('password')?.errors">

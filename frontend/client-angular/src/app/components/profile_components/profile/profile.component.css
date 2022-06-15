@@ -4,3 +4,28 @@
   align-items: center;
   margin-top: 5%;
 }
+.mat-card-header {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  height: 5rem;
+  justify-content: space-between;
+}
+
+.card-header_icon {
+  font-size: 40px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.item-label {
+  margin-right: 10px;
+  font-weight: 600;
+}
+
+.card-shadow {
+  box-shadow: 5px 5px 15px #777;
+}

@@ -1,0 +1,8 @@
+.card-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.card-shadow {
+  box-shadow: 5px 5px 15px #777;
+}

@@ -15,3 +15,7 @@
   margin-right: 0.3rem;
   margin-top: 0.5rem;
 }
+
+.card-shadow {
+  box-shadow: 5px 5px 15px #777;
+}

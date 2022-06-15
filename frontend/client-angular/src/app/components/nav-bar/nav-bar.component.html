@@ -6,7 +6,7 @@
     <button mat-button routerLink="/add-operation">Add Operation</button>
     <button mat-button routerLink="/accounts">All Clients Accounts</button>
     <span class="example-spacer"></span>
-    <div *ngIf="isLogin">
+    <div *ngIf="auth.isLoggedIn">
         <button mat-button [matMenuTriggerFor]="menu">
             <mat-icon>account_circle</mat-icon>
         </button>
@@ -26,7 +26,7 @@
         </mat-menu>
 
     </div>
-    <div *ngIf="!isLogin">
+    <div *ngIf="!auth.isLoggedIn">
         <button mat-button routerLink="/authentication/log-in">Log in</button>
     </div>
 
