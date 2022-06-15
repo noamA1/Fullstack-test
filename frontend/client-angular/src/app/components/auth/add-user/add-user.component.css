@@ -1,0 +1,17 @@
+.card-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.card-actions > button {
+  width: 40%;
+}
+
+.role-label {
+  padding-bottom: 10rem;
+}
+
+.example-radio-button {
+  margin-right: 0.3rem;
+  margin-top: 0.5rem;
+}

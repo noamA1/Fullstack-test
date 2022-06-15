@@ -1,0 +1,8 @@
+.card-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.card-actions > button {
+  width: 40%;
+}

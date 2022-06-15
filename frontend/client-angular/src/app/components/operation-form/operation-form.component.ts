@@ -1,6 +1,6 @@
-import { NotificationService } from './../../services/notification.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
-import { OperationService } from './../../services/operation.service';
+import { OperationService } from '../../shared/services/operation.service';
 import { Operation } from './../../models/operation';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';

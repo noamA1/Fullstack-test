@@ -1,0 +1,70 @@
+<mat-card class="example-card">
+    <mat-card-header>
+        <mat-card-title class="card-header">
+            Add new user
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+        <div [formGroup]="registerForm">
+            <mat-form-field appearance="standard">
+                <mat-label>Enter user first name</mat-label>
+                <input matInput formControlName="fName" required>
+                <mat-error *ngIf="registerForm.get('fName')?.errors">{{getErrorMessage("fName")}}</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field appearance="standard">
+                <mat-label>Enter user last name</mat-label>
+                <input matInput formControlName="lName" required>
+                <mat-error *ngIf="registerForm.get('lName')?.errors">{{getErrorMessage("lName")}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-label>Enter user phone number</mat-label>
+                <input matInput type="tel" formControlName="tel" required>
+                <mat-icon matSuffix>phone</mat-icon>
+                <mat-hint>052-1234567</mat-hint>
+                <mat-error *ngIf="registerForm.get('tel')?.errors">{{getErrorMessage("tel")}}</mat-error>
+            </mat-form-field>
+
+
+            <mat-label class="role-label">Role </mat-label>
+            <div>
+                <mat-radio-group formControlName="role">
+                    <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role">{{ role }}
+                    </mat-radio-button>
+                </mat-radio-group>
+                <mat-error *ngIf="roleError">
+                    required
+                </mat-error>
+            </div>
+
+            <mat-form-field appearance="standard">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" formControlName="email" required>
+                <mat-icon matSuffix>mail</mat-icon>
+                <mat-error *ngIf="registerForm.get('email')?.errors">{{getErrorMessage('email')}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="example-full-width">
+                <mat-label>Enter your password</mat-label>
+                <input matInput type="text" formControlName="password" #userPassword minlength="6"
+                    [type]="hide ? 'password' : 'text'">
+                <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+                    <mat-icon style="margin-bottom: 0.5rem">{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-hint style="color:#333" align="end">{{ userPassword.value?.length }} / 6</mat-hint>
+                <mat-error *ngIf="registerForm.get('password')?.errors">
+                    {{getErrorMessage('password')}}
+                </mat-error>
+
+            </mat-form-field>
+        </div>
+    </mat-card-content>
+    <mat-card-actions class="card-actions">
+        <button mat-raised-button color="primary" (click)="add()">
+            Add User
+        </button>
+    </mat-card-actions>
+</mat-card>

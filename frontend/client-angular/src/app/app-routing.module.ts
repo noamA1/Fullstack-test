@@ -4,9 +4,23 @@ import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { OperationFormComponent } from './components/operation-form/operation-form.component';
-
+import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
+import { AddUserComponent } from './components/auth/add-user/add-user.component';
+import { LoginComponent } from './components/auth/login/login.component';
+// canActivate: [SecureInnerPagesGuard]
+// canActivate: [SecureInnerPagesGuard]
+// canActivate: [SecureInnerPagesGuard]
+// canActivate: [SecureInnerPagesGuard]
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  {
+    path: 'authentication',
+    children: [
+      { path: 'log-in', component: LoginComponent },
+      { path: 'register-user', component: AddUserComponent },
+      { path: 'forgot-password', component: ForgotPasswordComponent },
+    ],
+  },
   { path: 'add-operation', component: OperationFormComponent },
   {
     path: 'accounts',

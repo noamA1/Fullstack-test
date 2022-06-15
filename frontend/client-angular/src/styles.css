@@ -26,3 +26,45 @@ body {
   color: #e9ecef;
   text-align: center;
 }
+
+.example-card {
+  max-width: 400px;
+  margin-bottom: 8px;
+  margin: 20px auto;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.mat-card-header {
+  background: linear-gradient(
+    to right bottom,
+    rgba(151, 117, 250, 1) 0%,
+    rgba(116, 143, 252, 1) 100%
+  );
+  color: transparent;
+  background-clip: text;
+
+  font-size: 22px;
+  text-transform: uppercase;
+
+  justify-content: center;
+}
+
+mat-hint,
+mat-error {
+  margin: 5px;
+}
+
+.card-actions {
+  display: flex;
+  justify-content: center;
+}

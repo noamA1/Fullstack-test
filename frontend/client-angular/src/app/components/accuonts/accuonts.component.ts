@@ -1,8 +1,8 @@
-import { NotificationService } from './../../services/notification.service';
+import { NotificationService } from '../../shared/services/notification.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Account } from './../../models/account';
-import { AccountService } from './../../services/account.service';
+import { AccountService } from '../../shared/services/account.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
