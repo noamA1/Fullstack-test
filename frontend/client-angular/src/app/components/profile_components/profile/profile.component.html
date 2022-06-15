@@ -1,0 +1,57 @@
+<div class="spiner-container" *ngIf="!(userProfile$ | async)">
+    <mat-spinner class="progress-spiner"></mat-spinner>Loading Data...
+</div>
+
+<div *ngIf="(userProfile$ | async)" fxLayout="row" fxFlex="50" fxLayoutAlign="center" class="profile-main">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title class="card-header">
+                <mat-icon>account_circle</mat-icon>
+                Your profile
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-list>
+                <mat-list-item>
+                    <mat-label>
+                        First name:
+                    </mat-label>
+                    {{firstName}}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <mat-label>
+                        Last name:
+                    </mat-label>
+                    {{lastName}}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <mat-label>
+                        Email:
+                    </mat-label>
+                    {{email}}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <mat-label>
+                        Role:
+                    </mat-label>
+                    {{role}}
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item>
+                    <mat-label>
+                        Phone:
+                    </mat-label>
+                    {{phone}}
+                </mat-list-item>
+            </mat-list>
+        </mat-card-content>
+        <mat-card-actions class="card-actions">
+            <button mat-raised-button color="primary" (click)="edit()">
+                Edit Your Profile
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>

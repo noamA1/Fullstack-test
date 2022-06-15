@@ -25,6 +25,8 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { AuthService } from './shared/services/auth.service';
 import { AddUserComponent } from './components/auth/add-user/add-user.component';
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
+import { ProfileComponent } from './components/profile_components/profile/profile.component';
+import { EditProfileComponent } from './components/profile_components/edit-profile/edit-profile.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +41,8 @@ import { ForgotPasswordComponent } from './components/auth/forgot-password/forgo
     LoginComponent,
     AddUserComponent,
     ForgotPasswordComponent,
+    ProfileComponent,
+    EditProfileComponent,
   ],
   imports: [
     BrowserModule,

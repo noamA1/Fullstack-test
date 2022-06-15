@@ -61,6 +61,7 @@ export class AddUserComponent implements OnInit {
       this.registerForm.value.password,
       this.registerForm.value.fName,
       this.registerForm.value.lName,
+      this.registerForm.value.tel,
       this.registerForm.value.role
     );
   }

@@ -43,6 +43,7 @@ export class AuthService {
     password: string,
     firstName: string,
     lastName: string,
+    phone: string,
     role: string
   ) {
     return this.afAuth
@@ -52,6 +53,7 @@ export class AuthService {
           result.user,
           firstName,
           lastName,
+          phone,
           role
         );
       })
@@ -64,6 +66,7 @@ export class AuthService {
     user: any,
     first: string,
     last: string,
+    phone: string,
     role: string
   ) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(
@@ -75,6 +78,7 @@ export class AuthService {
       email: user.email,
       firstName: first,
       lastName: last,
+      phoneNumber: phone,
       userRole: role,
     };
     return userRef.set(userData, {
