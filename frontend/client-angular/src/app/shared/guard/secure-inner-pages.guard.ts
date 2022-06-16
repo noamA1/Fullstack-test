@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  Router,
   RouterStateSnapshot,
 } from '@angular/router';
 import { Observable } from 'rxjs';
@@ -14,14 +15,14 @@ export class SecureInnerPagesGuard implements CanActivate {
   connectedUser: any;
   role: string | undefined;
 
-  constructor() {}
+  constructor(private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<any> | boolean {
     this.role = localStorage.getItem('userRole')?.toString();
     if (this.role !== 'manager') {
-      window.history.back();
+      this.router.navigate(['/']);
       return false;
     }
     return true;

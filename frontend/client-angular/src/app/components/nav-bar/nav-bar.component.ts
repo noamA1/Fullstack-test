@@ -13,24 +13,13 @@ export class NavBarComponent implements OnInit {
   docId: string = '';
   connectedUser: any;
   userRole: string | undefined;
+  displayName: String | undefined;
 
-  constructor(
-    public auth: AuthService,
-    private profileService: ProfileService
-  ) {}
+  constructor(public auth: AuthService) {}
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem('userRole')?.toString();
     this.isLogin = this.auth.isLoggedIn;
-    if (this.isLogin) {
-      this.docId = this.auth.getUser().uid;
-      // this.docId = JSON.parse(localStorage.getItem('user')!).uid;
-      this.connectedUser = this.profileService.getSingleUser(this.docId);
-      console.log(this.connectedUser);
-      // this.connectedUser.subscribe((info: any) => {
-      //   this.fullName = `${info.firstName} ${info.lastName}`;
-      // });
-    }
   }
 
   signOut() {

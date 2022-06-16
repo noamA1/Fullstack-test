@@ -28,6 +28,7 @@ import { ForgotPasswordComponent } from './components/auth/forgot-password/forgo
 import { ProfileComponent } from './components/profile_components/profile/profile.component';
 import { EditProfileComponent } from './components/profile_components/edit-profile/edit-profile.component';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { MAT_DATE_LOCALE } from '@angular/material/core';
     ForgotPasswordComponent,
     ProfileComponent,
     EditProfileComponent,
+    NotFoundPageComponent,
   ],
   imports: [
     BrowserModule,

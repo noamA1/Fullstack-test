@@ -47,11 +47,15 @@ export class AuthService {
     firstName: string,
     lastName: string,
     phone: string,
-    role: string
+    role: string,
+    displayNmae: string
   ) {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
+        result.user?.updateProfile({
+          displayName: displayNmae,
+        });
         this.SetUserDataByEmailAndPassword(
           result.user,
           firstName,
@@ -107,7 +111,14 @@ export class AuthService {
 
   getUser() {
     const user = JSON.parse(localStorage.getItem('user')!);
-    return user;
+    let role = localStorage.getItem('userRole');
+    if (role !== null) {
+      return {
+        user: user,
+        role: role,
+      };
+    }
+    return;
   }
 
   SetUserData(user: any) {

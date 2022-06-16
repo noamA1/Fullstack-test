@@ -1,6 +1,7 @@
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-add-user',
@@ -8,11 +9,16 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./add-user.component.css'],
 })
 export class AddUserComponent implements OnInit {
-  constructor(private fb: FormBuilder, private authService: AuthService) {}
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private notificationService: NotificationService
+  ) {}
   hide = true;
   roles = ['manager', 'employee'];
   role: string | undefined;
   roleError = false;
+  displayName: string | undefined;
 
   registerForm = this.fb.group({
     tel: [
@@ -56,13 +62,19 @@ export class AddUserComponent implements OnInit {
     } else {
       this.roleError = false;
     }
+    this.displayName = `${this.registerForm.value.fName} ${this.registerForm.value.lName}`;
     this.authService.SignUp(
       this.registerForm.value.email,
       this.registerForm.value.password,
       this.registerForm.value.fName,
       this.registerForm.value.lName,
       this.registerForm.value.tel,
-      this.registerForm.value.role
+      this.registerForm.value.role,
+      this.displayName
+    );
+    this.notificationService.showSnackBar(
+      'The employee was added successfully',
+      'success-snackbar'
     );
   }
 }

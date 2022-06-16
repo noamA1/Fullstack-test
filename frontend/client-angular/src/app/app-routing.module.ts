@@ -11,6 +11,7 @@ import { LoginComponent } from './components/auth/login/login.component';
 import { ProfileComponent } from './components/profile_components/profile/profile.component';
 import { AuthGuard } from './shared/guard/auth.guard';
 import { SecureInnerPagesGuard } from './shared/guard/secure-inner-pages.guard';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -54,6 +55,8 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'not-found', component: NotFoundPageComponent },
+  { path: '**', redirectTo: '/not-found' },
 ];
 
 @NgModule({

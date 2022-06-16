@@ -1,10 +1,11 @@
 <mat-toolbar class="app-header" color="primary">
 
     <span>Bank App</span>
-
-    <button mat-button routerLink="/">Accuont Operation</button>
-    <button mat-button routerLink="/add-operation">Add Operation</button>
-    <button mat-button routerLink="/accounts">All Clients Accounts</button>
+    <div *ngIf="auth.isLoggedIn">
+        <button mat-button routerLink="/">Accuont Operation</button>
+        <button mat-button routerLink="/add-operation">Add Operation</button>
+        <button mat-button routerLink="/accounts">All Clients Accounts</button>
+    </div>
     <span class="example-spacer"></span>
     <div *ngIf="auth.isLoggedIn">
         <button mat-button [matMenuTriggerFor]="menu">
@@ -12,10 +13,10 @@
         </button>
         <mat-menu #menu="matMenu">
             <button class="menu-title" mat-menu-item disabled>
-                Welcome, <span>{{fullName}}</span>
+                Welcome, <span>{{auth.getUser()?.user.displayName}}</span>
             </button>
             <mat-divider></mat-divider>
-            <button *ngIf="userRole === 'manager'" routerLink="/add-user" mat-menu-item>
+            <button *ngIf="auth.getUser()?.role === 'manager'" routerLink="/add-user" mat-menu-item>
                 <mat-icon>person_add</mat-icon>
                 <span>Add Employee</span>
             </button>

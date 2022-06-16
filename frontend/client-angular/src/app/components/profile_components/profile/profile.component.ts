@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.docId = this.authSer.getUser().uid;
+    this.docId = this.authSer.getUser()?.user.uid;
     this.userProfile$ = this.profileSer.getSingleUser(this.docId);
     this.userProfile$.subscribe((info: any) => {
       this.email = info.email;
