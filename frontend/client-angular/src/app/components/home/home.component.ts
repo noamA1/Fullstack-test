@@ -25,6 +25,8 @@ export class HomeComponent implements OnInit {
     @Inject(LOCALE_ID) public locale: string
   ) {}
 
+  ngOnInit(): void {}
+
   getErrorMessage() {
     if (this.accuontNum.hasError('required')) {
       return 'You must enter a value';
@@ -58,5 +60,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  start = new Date(2020, 1, 1);
+  end = new Date(2020, 5, 1);
+
+  monthDiff(start: any, payments: any) {
+    let months;
+    start = new Date(start);
+    months = (new Date().getFullYear() - start.getFullYear()) * 12;
+    months -= start.getMonth();
+    months += new Date().getMonth();
+    return payments - months;
+  }
 }

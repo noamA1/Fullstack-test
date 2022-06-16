@@ -15,6 +15,10 @@
                 Welcome, <span>{{fullName}}</span>
             </button>
             <mat-divider></mat-divider>
+            <button *ngIf="userRole === 'manager'" routerLink="/add-user" mat-menu-item>
+                <mat-icon>person_add</mat-icon>
+                <span>Add Employee</span>
+            </button>
             <button routerLink="/profile" mat-menu-item>
                 <mat-icon>manage_accounts</mat-icon>
                 <span>Profile</span>

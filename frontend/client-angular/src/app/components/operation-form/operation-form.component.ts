@@ -14,6 +14,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class OperationFormComponent implements OnInit {
   newOperation: Operation | undefined;
   type = new FormControl('', Validators.required);
+  dateError: boolean = false;
+  // date = new FormControl('', Validators.required);
 
   constructor(
     private operationService: OperationService,
@@ -34,6 +36,7 @@ export class OperationFormComponent implements OnInit {
         Validators.max(999999999),
       ],
     ],
+    date: ['', Validators.required],
     payments: [
       '',
       [
@@ -73,6 +76,7 @@ export class OperationFormComponent implements OnInit {
         key.includes('Payments') ? '1 to 999' : '1 to 999999999 '
       } only`;
     }
+    // Operation date is required
 
     return;
   }
@@ -101,7 +105,7 @@ export class OperationFormComponent implements OnInit {
       accountNumber: this.operationForm.value.accountNum,
       type: this.type.value,
       amount: this.operationForm.value.amount,
-      operationDate: new Date(),
+      operationDate: this.operationForm.value.date,
     };
 
     if (this.type.value === 'loan') {

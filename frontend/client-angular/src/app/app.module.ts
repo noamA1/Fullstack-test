@@ -27,6 +27,7 @@ import { AddUserComponent } from './components/auth/add-user/add-user.component'
 import { ForgotPasswordComponent } from './components/auth/forgot-password/forgot-password.component';
 import { ProfileComponent } from './components/profile_components/profile/profile.component';
 import { EditProfileComponent } from './components/profile_components/edit-profile/edit-profile.component';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -58,7 +59,7 @@ import { EditProfileComponent } from './components/profile_components/edit-profi
     AngularFirestoreModule,
     AngularFireDatabaseModule,
   ],
-  providers: [AuthService],
+  providers: [AuthService, { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

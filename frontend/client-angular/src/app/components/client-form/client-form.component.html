@@ -22,11 +22,17 @@
                 <mat-error *ngIf="accountForm.get('fName')?.errors">{{getErrorMessage("fName")}}</mat-error>
             </mat-form-field>
 
-
             <mat-form-field appearance="standard">
                 <mat-label>Enter client last name</mat-label>
                 <input matInput [(ngModel)]="lastName" formControlName="lName" required>
                 <mat-error *ngIf="accountForm.get('lName')?.errors">{{getErrorMessage("lName")}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field appearance="standard">
+                <mat-label>Enter your email</mat-label>
+                <input matInput placeholder="pat@example.com" [(ngModel)]="email" formControlName="email" required>
+                <mat-icon class="input-icon" matSuffix>mail</mat-icon>
+                <mat-error *ngIf="accountForm.get('email')?.errors">{{getErrorMessage('email')}}</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="standard">

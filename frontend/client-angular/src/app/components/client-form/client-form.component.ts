@@ -18,6 +18,7 @@ export class ClientFormComponent implements OnInit {
   firstName: String = '';
   lastName: String = '';
   phoneNumber: String = '';
+  email: String = '';
   clientAccount: Account | undefined;
   docId: String = '';
   editMode: boolean = false;
@@ -39,6 +40,7 @@ export class ClientFormComponent implements OnInit {
         Validators.pattern('[0-9]{9}'),
       ],
     ],
+    email: ['', [Validators.required, Validators.email]],
     account: [
       '',
       [
@@ -65,6 +67,9 @@ export class ClientFormComponent implements OnInit {
     if (this.accountForm.get(key)?.errors?.['pattern']) {
       return this.messageForPatternValidation(key);
     }
+    if (this.accountForm.get(key)?.errors?.['email']) {
+      return 'Enter a valid email address';
+    }
     return;
   }
 
@@ -89,14 +94,19 @@ export class ClientFormComponent implements OnInit {
     const url = this.router.url;
 
     if (url.endsWith('edit')) {
-      this.editMode = true;
-      this.title = 'Edit Client Account';
-      this.accuontNum = window.history.state.account.accountNumber;
-      this.firstName = window.history.state.account.firstName;
-      this.lastName = window.history.state.account.lastName;
-      this.clientId = window.history.state.account.clientID;
-      this.phoneNumber = window.history.state.account.phoneNumber;
-      this.docId = window.history.state.account._id;
+      try {
+        this.editMode = true;
+        this.title = 'Edit Client Account';
+        this.accuontNum = window.history.state.account.accountNumber;
+        this.firstName = window.history.state.account.firstName;
+        this.lastName = window.history.state.account.lastName;
+        this.clientId = window.history.state.account.clientID;
+        this.email = window.history.state.account.email;
+        this.phoneNumber = window.history.state.account.phoneNumber;
+        this.docId = window.history.state.account._id;
+      } catch (error) {
+        this.router.navigate(['/accounts']);
+      }
     }
   }
 
@@ -107,6 +117,7 @@ export class ClientFormComponent implements OnInit {
       lastName: this.accountForm.value.lName,
       accountNumber: this.accountForm.value.account,
       phoneNumber: this.accountForm.value.tel,
+      email: this.accountForm.value.email,
     };
     if (this.editMode) {
       this.accountSer

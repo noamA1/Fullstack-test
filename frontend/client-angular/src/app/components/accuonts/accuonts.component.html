@@ -19,6 +19,11 @@
         <td mat-cell *matCellDef="let element"> {{element.firstName}} {{element.lastName}} </td>
     </ng-container>
 
+    <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+    </ng-container>
+
     <ng-container matColumnDef="Phone number">
         <th mat-header-cell *matHeaderCellDef> Phone number </th>
         <td mat-cell *matCellDef="let element"> {{element.phoneNumber}} </td>

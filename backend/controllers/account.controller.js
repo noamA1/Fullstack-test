@@ -27,6 +27,7 @@ exports.create = (req, res) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     accountNumber: req.body.accountNumber,
+    email: req.body.email,
     phoneNumber: !req.body.phoneNumber ? "" : req.body.phoneNumber,
   });
   // console.log(req.);
@@ -111,6 +112,7 @@ exports.update = (req, res) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       accountNumber: req.body.accountNumber,
+      email: req.body.email,
       phoneNumber: !req.body.phoneNumber ? "" : req.body.phoneNumber,
     },
     { new: true }

@@ -28,6 +28,16 @@
                 <mat-error *ngIf="operationForm.get('amount')?.errors">{{getErrorMessage("amount")}}</mat-error>
             </mat-form-field>
 
+            <mat-form-field color="primary" appearance="standard">
+                <mat-label>Operation date</mat-label>
+                <input matInput [matDatepicker]="picker2" formControlName="date" [readonly]="true">
+                <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="false">
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker2 color="primary" [disabled]="false"></mat-datepicker>
+                <mat-error *ngIf="operationForm.get('date')?.errors">{{getErrorMessage("date")}}</mat-error>
+                <!-- <mat-error *ngIf="dateError">Operation date is required</mat-error> -->
+            </mat-form-field>
+
             <ng-container *ngIf="type.value === 'loan'">
                 <mat-form-field appearance="standard">
                     <mat-label>Enter number of payments</mat-label>
@@ -42,8 +52,9 @@
                     <mat-error *ngIf="operationForm.get('interest')?.errors">{{getErrorMessage("interest")}}
                     </mat-error>
                 </mat-form-field>
-
             </ng-container>
+
+
         </div>
     </mat-card-content>
     <mat-card-actions class="card-actions">

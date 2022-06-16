@@ -40,8 +40,10 @@
 
                     <span> <b>Operation Date:&nbsp;</b>{{operation.operationDate | date:'dd/MM/yyyy'}}</span>
                     <ng-container *ngIf="operation.type === 'loan'">
-                        <span><b>Payments: &nbsp;</b>{{operation.payments}} per month</span>
+                        <span><b>Payments: &nbsp;</b>{{operation.payments}} months</span>
                         <span><b>Interest value: &nbsp;</b> {{operation.interest}} &#x25;</span>
+                        <span><b>Payments left: &nbsp;</b> {{monthDiff(operation.operationDate,
+                            operation.payments)}}</span>
                     </ng-container>
                 </mat-card-content>
             </mat-card>

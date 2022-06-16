@@ -4,4 +4,5 @@ export class Account {
   lastName: String = '';
   accountNumber: Number = 0;
   phoneNumber: String = '';
+  email: String = '';
 }

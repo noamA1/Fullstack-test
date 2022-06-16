@@ -7,6 +7,7 @@ const AccountSchema = mongoose.Schema(
     lastName: String,
     accountNumber: Number,
     phoneNumber: String,
+    email: String,
   },
   {
     timestamps: true,

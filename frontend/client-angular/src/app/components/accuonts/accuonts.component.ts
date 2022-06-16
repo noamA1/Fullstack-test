@@ -23,6 +23,7 @@ export class AccuontsComponent implements OnInit {
     'Account number',
     'Full name',
     'Phone number',
+    'Email',
     'delete',
     'edit',
   ];
@@ -33,6 +34,7 @@ export class AccuontsComponent implements OnInit {
   getAllAccounts() {
     this.accountService.getAll().subscribe((resultArray) => {
       this.dataSource = resultArray;
+      console.log(this.dataSource);
     });
   }
 

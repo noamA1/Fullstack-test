@@ -18,13 +18,13 @@ const routes: Routes = [
     path: 'authentication',
     children: [
       { path: 'log-in', component: LoginComponent },
-      {
-        path: 'register-user',
-        component: AddUserComponent,
-        canActivate: [AuthGuard, SecureInnerPagesGuard],
-      },
       { path: 'forgot-password', component: ForgotPasswordComponent },
     ],
+  },
+  {
+    path: 'add-user',
+    component: AddUserComponent,
+    canActivate: [AuthGuard, SecureInnerPagesGuard],
   },
   {
     path: 'add-operation',
