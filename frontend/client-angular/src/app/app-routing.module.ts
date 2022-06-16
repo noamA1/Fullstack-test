@@ -9,34 +9,49 @@ import { ForgotPasswordComponent } from './components/auth/forgot-password/forgo
 import { AddUserComponent } from './components/auth/add-user/add-user.component';
 import { LoginComponent } from './components/auth/login/login.component';
 import { ProfileComponent } from './components/profile_components/profile/profile.component';
-// canActivate: [SecureInnerPagesGuard]
-// canActivate: [SecureInnerPagesGuard]
-// canActivate: [SecureInnerPagesGuard]
-// canActivate: [SecureInnerPagesGuard]
+import { AuthGuard } from './shared/guard/auth.guard';
+import { SecureInnerPagesGuard } from './shared/guard/secure-inner-pages.guard';
+
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   {
     path: 'authentication',
     children: [
       { path: 'log-in', component: LoginComponent },
-      { path: 'register-user', component: AddUserComponent },
+      {
+        path: 'register-user',
+        component: AddUserComponent,
+        canActivate: [AuthGuard, SecureInnerPagesGuard],
+      },
       { path: 'forgot-password', component: ForgotPasswordComponent },
     ],
   },
-  { path: 'add-operation', component: OperationFormComponent },
+  {
+    path: 'add-operation',
+    component: OperationFormComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'accounts',
     children: [
-      { path: '', component: AccuontsComponent },
-      { path: 'add', component: ClientFormComponent },
-      { path: 'edit', component: ClientFormComponent },
+      { path: '', component: AccuontsComponent, canActivate: [AuthGuard] },
+      { path: 'add', component: ClientFormComponent, canActivate: [AuthGuard] },
+      {
+        path: 'edit',
+        component: ClientFormComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
   {
     path: 'profile',
     children: [
-      { path: '', component: ProfileComponent },
-      { path: 'edit', component: EditProfileComponent },
+      { path: '', component: ProfileComponent, canActivate: [AuthGuard] },
+      {
+        path: 'edit',
+        component: EditProfileComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
 ];

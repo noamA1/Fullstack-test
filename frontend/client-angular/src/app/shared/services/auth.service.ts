@@ -6,6 +6,7 @@ import {
   AngularFirestore,
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
+import { ProfileService } from './profile.service';
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +18,8 @@ export class AuthService {
     public afs: AngularFirestore,
     public afAuth: AngularFireAuth,
     public router: Router,
-    public ngZone: NgZone
+    public ngZone: NgZone,
+    private profileService: ProfileService
   ) {
     this.userData = this.afAuth.authState;
   }
@@ -25,8 +27,9 @@ export class AuthService {
   SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
-      .then((result) => {
+      .then((result: any) => {
         this.ngZone.run(() => {
+          this.profileService.setUserRole(result.user?.uid);
           localStorage.setItem('user', JSON.stringify(result.user));
           JSON.parse(localStorage.getItem('user')!);
           this.router.navigate(['/']);
@@ -116,9 +119,11 @@ export class AuthService {
       email: user.email,
     });
   }
+
   SignOut() {
     return this.afAuth.signOut().then(() => {
       localStorage.removeItem('user');
+      localStorage.removeItem('userRole');
       this.router.navigate(['/authentication/log-in']);
     });
   }
