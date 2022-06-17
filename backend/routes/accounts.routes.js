@@ -1,16 +1,16 @@
 module.exports = (app) => {
   const accounts = require("../controllers/account.controller");
 
-  // Create a new car
+  // Create a new account
   app.post("/accounts", accounts.create);
 
   // Retrieve all accounts
   app.get("/accounts", accounts.findAll);
 
-  // Retrieve a single car with carId
+  // Retrieve a single account with accountId
   app.get("/accounts/:accountId", accounts.findOne);
 
-  // Update a car with carId
+  // Update a account with accountId
   app.put("/accounts/:accountId", accounts.update);
 
   // Delete a account with accountId

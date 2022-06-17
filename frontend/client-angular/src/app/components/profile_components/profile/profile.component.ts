@@ -1,6 +1,4 @@
 import { Router } from '@angular/router';
-import { User } from './../../../models/user';
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { ProfileService } from 'src/app/shared/services/profile.service';
 import { AuthService } from 'src/app/shared/services/auth.service';

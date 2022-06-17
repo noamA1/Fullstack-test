@@ -1,7 +1,5 @@
-import { User } from './../../models/user';
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { elementAt, map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

@@ -1,16 +1,15 @@
-import { NotificationService } from '../../shared/services/notification.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Account } from './../../models/account';
-import { AccountService } from '../../shared/services/account.service';
 import { Component, OnInit } from '@angular/core';
+import { AccountService } from 'src/app/shared/services/account.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { Account } from 'src/app/shared/models/account';
 
 @Component({
   selector: 'app-accuonts',
-  templateUrl: './accuonts.component.html',
-  styleUrls: ['./accuonts.component.css'],
+  templateUrl: './accounts.component.html',
+  styleUrls: ['./accounts.component.css'],
 })
-export class AccuontsComponent implements OnInit {
+export class AccountsComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private router: Router,
@@ -34,7 +33,6 @@ export class AccuontsComponent implements OnInit {
   getAllAccounts() {
     this.accountService.getAll().subscribe((resultArray) => {
       this.dataSource = resultArray;
-      console.log(this.dataSource);
     });
   }
 

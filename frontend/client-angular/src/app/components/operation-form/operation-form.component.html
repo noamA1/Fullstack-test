@@ -36,7 +36,6 @@
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker2 color="primary" [disabled]="false"></mat-datepicker>
                 <mat-error *ngIf="operationForm.get('date')?.errors">{{getErrorMessage("date")}}</mat-error>
-                <!-- <mat-error *ngIf="dateError">Operation date is required</mat-error> -->
             </mat-form-field>
 
             <ng-container *ngIf="type.value === 'loan'">

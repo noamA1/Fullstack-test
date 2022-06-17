@@ -1,10 +1,9 @@
 import { NotificationService } from '../../shared/services/notification.service';
 import { Validators, FormBuilder, FormControl } from '@angular/forms';
 import { OperationService } from '../../shared/services/operation.service';
-import { Operation } from './../../models/operation';
+import { Operation } from '../../shared/models/operation';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-operation-form',
@@ -15,7 +14,6 @@ export class OperationFormComponent implements OnInit {
   newOperation: Operation | undefined;
   type = new FormControl('', Validators.required);
   dateError: boolean = false;
-  // date = new FormControl('', Validators.required);
 
   constructor(
     private operationService: OperationService,
@@ -76,8 +74,6 @@ export class OperationFormComponent implements OnInit {
         key.includes('Payments') ? '1 to 999' : '1 to 999999999 '
       } only`;
     }
-    // Operation date is required
-
     return;
   }
 

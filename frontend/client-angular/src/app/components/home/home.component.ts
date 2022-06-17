@@ -1,5 +1,5 @@
 import { OperationService } from '../../shared/services/operation.service';
-import { Operation } from './../../models/operation';
+import { Operation } from '../../shared/models/operation';
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { formatNumber } from '@angular/common';

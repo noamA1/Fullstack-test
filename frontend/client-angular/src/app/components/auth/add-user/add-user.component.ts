@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -12,7 +13,8 @@ export class AddUserComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private router: Router
   ) {}
   hide = true;
   roles = ['manager', 'employee'];
@@ -72,6 +74,7 @@ export class AddUserComponent implements OnInit {
       this.registerForm.value.role,
       this.displayName
     );
+    this.router.navigate(['/']);
     this.notificationService.showSnackBar(
       'The employee was added successfully',
       'success-snackbar'

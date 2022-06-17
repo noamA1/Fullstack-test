@@ -1,8 +1,7 @@
 const Account = require("../models/account.model");
 
-// Create and Save a new Note
+// Create and Save a new Account
 exports.create = (req, res) => {
-  // Validate request
   if (!req.body.clientID) {
     return res.status(400).send({
       message: "ID can not be empty",
@@ -21,7 +20,7 @@ exports.create = (req, res) => {
     });
   }
 
-  // Create a Note
+  // Create a Account
   const account = new Account({
     clientID: req.body.clientID,
     firstName: req.body.firstName,
@@ -30,9 +29,8 @@ exports.create = (req, res) => {
     email: req.body.email,
     phoneNumber: !req.body.phoneNumber ? "" : req.body.phoneNumber,
   });
-  // console.log(req.);
 
-  // Save Note in the database
+  // Save Account in the database
   account
     .save()
     .then((data) => {
@@ -46,7 +44,7 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve and return all notes from the database.
+// Retrieve and return all accounts from the database.
 exports.findAll = (req, res) => {
   Account.find()
     .then((accounts) => {
@@ -60,7 +58,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single note with a noteId
+// Find a single account with a accountId
 exports.findOne = (req, res) => {
   Account.findById(req.params.accountId)
     .then((account) => {
@@ -83,9 +81,8 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Update a note identified by the noteId in the request
+// Update a account identified by the accountId in the request
 exports.update = (req, res) => {
-  // Validate Request
   if (!req.body.clientID) {
     return res.status(400).send({
       message: "ID can not be empty",
@@ -104,7 +101,7 @@ exports.update = (req, res) => {
     });
   }
 
-  // Find note and update it with the request body
+  // Find account and update it with the request body
   Account.findByIdAndUpdate(
     req.params.accountId,
     {
@@ -137,7 +134,7 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a note with the specified noteId in the request
+// Delete a account with the specified accountId in the request
 exports.delete = (req, res) => {
   Account.findByIdAndRemove(req.params.accountId)
     .then((account) => {

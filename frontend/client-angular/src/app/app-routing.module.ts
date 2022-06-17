@@ -1,6 +1,4 @@
 import { EditProfileComponent } from './components/profile_components/edit-profile/edit-profile.component';
-import { AccuontsComponent } from './components/accuonts/accuonts.component';
-import { ClientFormComponent } from './components/client-form/client-form.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -12,6 +10,8 @@ import { ProfileComponent } from './components/profile_components/profile/profil
 import { AuthGuard } from './shared/guard/auth.guard';
 import { SecureInnerPagesGuard } from './shared/guard/secure-inner-pages.guard';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { AccountsComponent } from './components/accountsComponents/accounts/accounts.component';
+import { ClientFormComponent } from './components/accountsComponents/client-form/client-form.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
@@ -35,7 +35,7 @@ const routes: Routes = [
   {
     path: 'accounts',
     children: [
-      { path: '', component: AccuontsComponent, canActivate: [AuthGuard] },
+      { path: '', component: AccountsComponent, canActivate: [AuthGuard] },
       { path: 'add', component: ClientFormComponent, canActivate: [AuthGuard] },
       {
         path: 'edit',

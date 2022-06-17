@@ -15,11 +15,8 @@
 .form-conatiner {
   width: 100%;
   margin-top: 20px;
-  /* margin-left: auto;
-  margin-right: auto; */
   display: flex;
   justify-content: center;
-  /* align-items: center; */
 }
 
 .example-container {
@@ -63,7 +60,6 @@ mat-card-content {
 .amount-span {
   display: flex;
   align-items: center;
-  /* justify-content: center; */
 }
 
 .amount-span > mat-icon {
@@ -79,7 +75,6 @@ mat-card-content {
   color: transparent;
   background-clip: text;
   text-transform: uppercase;
-  /* font-style: italic; */
 }
 
 .balance-card {

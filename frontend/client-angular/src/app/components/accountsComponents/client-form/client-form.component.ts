@@ -1,10 +1,9 @@
-import { NotificationService } from '../../shared/services/notification.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Account } from '../../../shared/models/account';
 import { Router } from '@angular/router';
-import { Account } from './../../models/account';
-import { AccountService } from '../../shared/services/account.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AccountService } from 'src/app/shared/services/account.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-client-form',

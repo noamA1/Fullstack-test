@@ -1,4 +1,4 @@
-import { User } from '../../models/user';
+import { User } from '../models/user';
 import { Router } from '@angular/router';
 import { Injectable, NgZone } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -40,7 +40,6 @@ export class AuthService {
       })
       .catch((error) => {
         const errorCode = error.code;
-        console.log(errorCode);
         if (
           errorCode === 'auth/invalid-email' ||
           errorCode === 'auth/wrong-password' ||
@@ -84,7 +83,6 @@ export class AuthService {
       })
       .catch((error) => {
         const errorCode = error.code;
-        console.log(errorCode);
         if (
           errorCode === 'auth/invalid-email' ||
           errorCode === 'auth/wrong-password' ||

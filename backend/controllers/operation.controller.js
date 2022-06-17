@@ -1,6 +1,6 @@
 const Operation = require("../models/operation.model");
 
-// Create and Save a new Note
+// Create and Save a new Operation
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.accountNumber) {
@@ -13,16 +13,11 @@ exports.create = (req, res) => {
     });
   } else if (!req.body.amount) {
     return res.status(400).send({
-      message: "amount can not be empty",
+      message: "Amount can not be empty",
     });
   }
-  // else if (!req.body.operationDate) {
-  //   return res.status(400).send({
-  //     message: "Operation Date can not be empty",
-  //   });
-  // }
 
-  // Create a Note
+  // Create a Operation
   const operation = new Operation({
     accountNumber: req.body.accountNumber,
     type: req.body.type,
@@ -34,7 +29,7 @@ exports.create = (req, res) => {
     operation.interest = req.body.interest;
   }
 
-  // Save Note in the database
+  // Save Operation in the database
   operation
     .save()
     .then((data) => {
@@ -48,7 +43,7 @@ exports.create = (req, res) => {
     });
 };
 
-// Retrieve and return all notes from the database.
+// Retrieve and return all operations from the database.
 exports.findAll = (req, res) => {
   Operation.find()
     .then((operations) => {
@@ -62,7 +57,7 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single note with a noteId
+// Find a single operation with a operationId
 exports.findOne = (req, res) => {
   Operation.findById(req.params.operationId)
     .then((operation) => {
@@ -81,93 +76,6 @@ exports.findOne = (req, res) => {
       }
       return res.status(500).send({
         message: "Error retrieving operation with id " + req.params.operationId,
-      });
-    });
-};
-
-// Update a note identified by the noteId in the request
-exports.update = (req, res) => {
-  // Validate Request
-  if (!req.body.accountNumber) {
-    return res.status(400).send({
-      message: "Account Number can not be empty",
-    });
-  } else if (!req.body.type) {
-    return res.status(400).send({
-      message: "Type can not be empty",
-    });
-  } else if (!req.body.amount) {
-    return res.status(400).send({
-      message: "amount can not be empty",
-    });
-  } else if (!req.body.operationDate) {
-    return res.status(400).send({
-      message: "Operation Date can not be empty",
-    });
-  }
-  if (!req.body.type === "loan") {
-    if (!req.body.payments) {
-      return res.status(400).send({
-        message: "payments can not be empty",
-      });
-    }
-    if (!req.body.interest) {
-      return res.status(400).send({
-        message: "interest can not be empty",
-      });
-    }
-  }
-
-  // Find note and update it with the request body
-  Operation.findByIdAndUpdate(
-    req.params.operationId,
-    {
-      accountNumber: req.body.accountNumber,
-      type: req.body.type,
-      amount: req.body.amount,
-      operationDate: req.body.operationDate,
-    },
-    { new: true }
-  )
-    .then((operation) => {
-      if (!operation) {
-        return res.status(404).send({
-          message: "operation not found with id " + req.params.operationId,
-        });
-      }
-      res.send(operation);
-    })
-    .catch((err) => {
-      if (err.kind === "ObjectId") {
-        return res.status(404).send({
-          message: "operation not found with id " + req.params.operationId,
-        });
-      }
-      return res.status(500).send({
-        message: "Error updating operation with id " + req.params.operationId,
-      });
-    });
-};
-
-// Delete a note with the specified noteId in the request
-exports.delete = (req, res) => {
-  Operation.findByIdAndRemove(req.params.operationId)
-    .then((operation) => {
-      if (!operation) {
-        return res.status(404).send({
-          message: "Operation not found with id " + req.params.operationId,
-        });
-      }
-      res.send({ message: "operation deleted successfully!" });
-    })
-    .catch((err) => {
-      if (err.kind === "ObjectId" || err.name === "NotFound") {
-        return res.status(404).send({
-          message: "Operation not found with id " + req.params.operationId,
-        });
-      }
-      return res.status(500).send({
-        message: "Could not delete operation with id " + req.params.operationId,
       });
     });
 };
