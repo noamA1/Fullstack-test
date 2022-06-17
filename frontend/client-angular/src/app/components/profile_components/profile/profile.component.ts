@@ -39,10 +39,12 @@ export class ProfileComponent implements OnInit {
   edit() {
     this.router.navigateByUrl('/profile/edit', {
       state: {
-        firstName: this.firstName,
-        lastName: this.lastName,
-        phone: this.phone,
-        id: this.docId,
+        user: {
+          firstName: this.firstName,
+          lastName: this.lastName,
+          phone: this.phone,
+          id: this.docId,
+        },
       },
     });
   }

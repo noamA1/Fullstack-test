@@ -34,11 +34,14 @@ export class EditProfileComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    console.log(window.history.state.firstName);
-    this.firstName = window.history.state.firstName;
-    this.lastName = window.history.state.lastName;
-    this.phone = window.history.state.phone;
-    this.id = window.history.state.id;
+    try {
+      this.firstName = window.history.state.user.firstName;
+      this.lastName = window.history.state.user.lastName;
+      this.phone = window.history.state.user.phone;
+      this.id = window.history.state.user.id;
+    } catch (error) {
+      this.router.navigate(['/profile']);
+    }
   }
 
   getErrorMessage(key: string) {

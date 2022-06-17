@@ -29,7 +29,8 @@
             <mat-label class="role-label">Role </mat-label>
             <div>
                 <mat-radio-group formControlName="role">
-                    <mat-radio-button class="example-radio-button" *ngFor="let role of roles" [value]="role">{{ role }}
+                    <mat-radio-button color="primary" class="example-radio-button" *ngFor="let role of roles"
+                        [value]="role">{{ role }}
                     </mat-radio-button>
                 </mat-radio-group>
                 <mat-error *ngIf="roleError">
@@ -62,7 +63,7 @@
         </div>
     </mat-card-content>
     <mat-card-actions class="card-actions">
-        <button mat-raised-button color="primary" (click)="add()">
+        <button mat-raised-button color="primary" [disabled]="registerForm.invalid" (click)="add()">
             Add User
         </button>
     </mat-card-actions>

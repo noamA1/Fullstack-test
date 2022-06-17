@@ -7,6 +7,7 @@ import {
   AngularFirestoreDocument,
 } from '@angular/fire/compat/firestore';
 import { ProfileService } from './profile.service';
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,8 @@ export class AuthService {
     public afAuth: AngularFireAuth,
     public router: Router,
     public ngZone: NgZone,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private notificationService: NotificationService
   ) {
     this.userData = this.afAuth.authState;
   }
@@ -37,7 +39,23 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        const errorCode = error.code;
+        console.log(errorCode);
+        if (
+          errorCode === 'auth/invalid-email' ||
+          errorCode === 'auth/wrong-password' ||
+          errorCode === 'auth/user-not-found'
+        ) {
+          this.notificationService.showSnackBar(
+            'Wrong email address or password.',
+            'danger-snackbar'
+          );
+        } else {
+          this.notificationService.showSnackBar(
+            'Unexpected Error',
+            'danger-snackbar'
+          );
+        }
       });
   }
 
@@ -65,7 +83,23 @@ export class AuthService {
         );
       })
       .catch((error) => {
-        window.alert(error.message);
+        const errorCode = error.code;
+        console.log(errorCode);
+        if (
+          errorCode === 'auth/invalid-email' ||
+          errorCode === 'auth/wrong-password' ||
+          errorCode === 'auth/user-not-found'
+        ) {
+          this.notificationService.showSnackBar(
+            'Wrong email address or password.',
+            'danger-snackbar'
+          );
+        } else {
+          this.notificationService.showSnackBar(
+            'Unexpected Error',
+            'danger-snackbar'
+          );
+        }
       });
   }
 

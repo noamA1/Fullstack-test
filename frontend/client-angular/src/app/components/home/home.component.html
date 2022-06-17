@@ -9,7 +9,8 @@
                 <input matInput placeholder="1234567" [formControl]="accuontNum" required>
                 <mat-error *ngIf="accuontNum.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="getAccuontDetails()">Show</button>
+            <button mat-raised-button color="primary" [disabled]="accuontNum.invalid"
+                (click)="getAccuontDetails()">Show</button>
         </form>
     </div>
     <mat-card *ngIf="balance" class="balance-card">
