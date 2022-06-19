@@ -13,7 +13,7 @@
         </button>
         <mat-menu #menu="matMenu">
             <button class="menu-title" mat-menu-item disabled>
-                Welcome, <span>{{auth.getUser()?.user.displayName}}</span>
+                Welcome,&nbsp;<span>{{auth.getUser()?.user.displayName}}</span>
             </button>
             <mat-divider></mat-divider>
             <button *ngIf="auth.getUser()?.role === 'manager'" routerLink="/add-user" mat-menu-item>
