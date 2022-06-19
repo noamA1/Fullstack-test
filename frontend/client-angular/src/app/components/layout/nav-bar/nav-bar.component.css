@@ -15,3 +15,16 @@ button {
   align-items: center;
   justify-content: center;
 }
+
+.mat-icon {
+  font-size: 32px;
+}
+
+.mat-menu-item {
+  display: flex;
+  align-items: center;
+}
+.mat-menu-item > .mat-icon {
+  font-size: 26px;
+  color: #b197fc;
+}

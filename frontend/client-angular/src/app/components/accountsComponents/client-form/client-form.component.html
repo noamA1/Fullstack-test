@@ -13,7 +13,8 @@
 
             <mat-form-field appearance="standard">
                 <mat-label>Enter an accuont number</mat-label>
-                <input matInput type="number" [(ngModel)]="accuontNum" formControlName="account" required>
+                <input matInput (blur)="checkAccontNumber()" type="number" [(ngModel)]="accuontNum"
+                    formControlName="account" required>
                 <mat-error *ngIf="accountForm.get('account')?.errors">{{getErrorMessage("account")}}</mat-error>
             </mat-form-field>
 

@@ -69,6 +69,10 @@ export class ClientFormComponent implements OnInit {
     if (this.accountForm.get(key)?.errors?.['email']) {
       return 'Enter a valid email address';
     }
+    if (this.accountForm.get(key)?.errors?.['notUnique']) {
+      return 'This account number alredy exists';
+    }
+
     return;
   }
 
@@ -109,6 +113,18 @@ export class ClientFormComponent implements OnInit {
     }
   }
 
+  checkAccontNumber() {
+    if (this.accountForm.value.account !== '') {
+      this.accountSer
+        .checkIfExists(this.accountForm.value.account)
+        .subscribe((result) => {
+          if (result.message.includes('exists')) {
+            this.accountForm.get('account')?.setErrors({ notUnique: true });
+          }
+        });
+    }
+  }
+
   addAccuont() {
     this.clientAccount = {
       clientID: this.accountForm.value.id,
@@ -118,6 +134,7 @@ export class ClientFormComponent implements OnInit {
       phoneNumber: this.accountForm.value.tel,
       email: this.accountForm.value.email,
     };
+
     if (this.editMode) {
       this.accountSer
         .updateClient(this.docId, this.clientAccount)

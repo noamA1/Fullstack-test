@@ -58,25 +58,28 @@ exports.findAll = (req, res) => {
     });
 };
 
-// Find a single account with a accountId
+// Find a single account with a account number
 exports.findOne = (req, res) => {
-  Account.findById(req.params.accountId)
+  Account.find({ accountNumber: req.params.accountNumber })
     .then((account) => {
-      if (!account) {
-        return res.status(404).send({
-          message: "Account not found with id " + req.params.accountId,
+      if (account.length === 0) {
+        return res.send({
+          message: "Account not found with number " + req.params.accountNumber,
         });
       }
-      res.send(account);
+      res.send({
+        message: `Account with number ${req.params.accountNumber} alredy exists`,
+      });
     })
     .catch((err) => {
-      if (err.kind === "ObjectId") {
+      if (err.kind === "ObjectNumber") {
         return res.status(404).send({
-          message: "Account not found with id " + req.params.accountId,
+          message: "Account not found with number " + req.params.accountNumber,
         });
       }
       return res.status(500).send({
-        message: "Error retrieving account with id " + req.params.accountId,
+        message:
+          "Error retrieving account with number " + req.params.accountNumber,
       });
     });
 };

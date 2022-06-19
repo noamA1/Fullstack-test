@@ -3,6 +3,8 @@ import { Operation } from '../../shared/models/operation';
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { formatNumber } from '@angular/common';
+import { AccountService } from 'src/app/shared/services/account.service';
+import { Account } from 'src/app/shared/models/account';
 
 @Component({
   selector: 'app-home',
@@ -10,36 +12,34 @@ import { formatNumber } from '@angular/common';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  accuontNum = new FormControl('', [
-    Validators.required,
-    Validators.minLength(6),
-    Validators.maxLength(6),
-    Validators.pattern('^[0-9]*$'),
-  ]);
+  allAccounts: Account[] = [];
+  accountNum = new FormControl('', Validators.required);
   balance: number = 0;
+  isEmptyArray: boolean | undefined;
 
   accuontOperations: Operation[] = [];
 
   constructor(
     private operationService: OperationService,
+    private accountService: AccountService,
     @Inject(LOCALE_ID) public locale: string
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.accountService.getAll().subscribe((resultArray) => {
+      this.allAccounts = resultArray;
+    });
+  }
 
   getErrorMessage() {
-    if (this.accuontNum.hasError('required')) {
+    if (this.accountNum.hasError('required')) {
       return 'You must enter a value';
-    } else if (this.accuontNum.hasError('minLength')) {
-      return 'An account number must be exactly 6 digits long';
-    } else if (this.accuontNum.hasError('maxLength')) {
-      return 'An account number must be exactly 6 digits long';
-    } else {
-      return 'Account number must contain numbers only';
     }
+    return;
   }
 
   calculateBalance() {
+    this.balance = 0;
     this.accuontOperations.forEach((operation) => {
       operation.type === 'cash withdrawal'
         ? (this.balance -= +operation.amount)
@@ -51,12 +51,18 @@ export class HomeComponent implements OnInit {
     return formatNumber(amount, this.locale);
   }
 
-  getAccuontDetails() {
+  getAccuontOperations() {
     this.operationService.getOperations().subscribe((operationAR) => {
       this.accuontOperations = operationAR.filter(
-        (operation) => operation.accountNumber === +this.accuontNum.value
+        (operation) => operation.accountNumber === +this.accountNum.value
       );
-      this.calculateBalance();
+      if (this.accuontOperations.length === 0) {
+        this.isEmptyArray = true;
+        return;
+      } else {
+        this.isEmptyArray = false;
+        this.calculateBalance();
+      }
     });
   }
 

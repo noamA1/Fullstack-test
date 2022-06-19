@@ -19,6 +19,34 @@
   justify-content: center;
 }
 
+.no-results-container {
+  width: 50vw;
+  margin: 25px auto;
+  border: 2px dashed #9775fa;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 15px 30px;
+}
+.no-results-container > .title {
+  line-height: 2;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.content > span {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
 .example-container {
   display: flex;
   flex-direction: column;
@@ -26,7 +54,8 @@
   width: 30%;
 }
 
-.card-title {
+.card-title,
+.title {
   background: linear-gradient(
     to right bottom,
     rgba(177, 151, 252, 1) 0%,

@@ -8,7 +8,7 @@ module.exports = (app) => {
   app.get("/accounts", accounts.findAll);
 
   // Retrieve a single account with accountId
-  app.get("/accounts/:accountId", accounts.findOne);
+  app.get("/accounts/:accountNumber", accounts.findOne);
 
   // Update a account with accountId
   app.put("/accounts/:accountId", accounts.update);

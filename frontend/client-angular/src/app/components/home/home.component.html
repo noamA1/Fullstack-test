@@ -5,20 +5,35 @@
                 Enter an account number to see all operations
             </h3>
             <mat-form-field appearance="standard">
-                <mat-label>Enter an accuont number</mat-label>
-                <input matInput placeholder="1234567" [formControl]="accuontNum" required>
-                <mat-error *ngIf="accuontNum.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-label>Choose account number</mat-label>
+                <mat-select [formControl]="accountNum">
+                    <mat-option *ngFor="let account of allAccounts" [value]="account.accountNumber">
+                        {{account.accountNumber}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="accountNum.hasError('required')">
+                    Please choose account number</mat-error>
             </mat-form-field>
-            <button mat-raised-button color="primary" [disabled]="accuontNum.invalid"
-                (click)="getAccuontDetails()">Show</button>
+            <button mat-raised-button color="primary" [disabled]="accountNum.invalid"
+                (click)="getAccuontOperations()">Show</button>
         </form>
     </div>
-    <mat-card *ngIf="balance" class="balance-card">
+    <mat-card *ngIf="accountNum.value !== '' && !isEmptyArray && isEmptyArray !== undefined" class=" balance-card">
         <mat-card-title class="card-title">Account Balance</mat-card-title>
         <mat-card-content [ngClass]="{
             'positive': balance > 0 ,
-            'negative': balance < 0}">{{formatAmountNumber(balance) }} &#x20AA;</mat-card-content>
+            'negative': balance <= 0}">{{formatAmountNumber(balance) }} &#x20AA;</mat-card-content>
     </mat-card>
+
+    <div *ngIf="accountNum.value !== '' && isEmptyArray" class="no-results-container">
+        <div class="title">
+            No Results
+        </div>
+        <div class="content">
+            There are noting to show yet,
+            <span>Add opreations to see the account recent activity and balance</span>
+        </div>
+
+    </div>
 
     <div class="cards-container">
         <div *ngFor="let operation of accuontOperations">

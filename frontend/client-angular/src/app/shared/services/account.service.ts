@@ -23,6 +23,10 @@ export class AccountService {
     return this.http.put<Account>(`${this.URL}/${id}`, account);
   }
 
+  checkIfExists(accountNumber: string): Observable<any> {
+    return this.http.get<string>(`${this.URL}/${accountNumber}`);
+  }
+
   deleteClient(accountId: String): Observable<Account> {
     return this.http.delete<Account>(`${this.URL}/${accountId}`);
   }

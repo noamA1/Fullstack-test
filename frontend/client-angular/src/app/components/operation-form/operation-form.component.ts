@@ -4,6 +4,8 @@ import { OperationService } from '../../shared/services/operation.service';
 import { Operation } from '../../shared/models/operation';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AccountService } from 'src/app/shared/services/account.service';
+import { Account } from 'src/app/shared/models/account';
 
 @Component({
   selector: 'app-operation-form',
@@ -13,18 +15,11 @@ import { Router } from '@angular/router';
 export class OperationFormComponent implements OnInit {
   newOperation: Operation | undefined;
   type = new FormControl('', Validators.required);
+  accountNum = new FormControl('', Validators.required);
   dateError: boolean = false;
-
-  constructor(
-    private operationService: OperationService,
-    private router: Router,
-    private fb: FormBuilder,
-    private notificationSer: NotificationService
-  ) {}
+  allAccounts: Account[] = [];
 
   operationForm = this.fb.group({
-    accountNum: ['', [Validators.required, Validators.pattern('[0-9]{6}')]],
-
     amount: [
       '',
       [
@@ -47,6 +42,14 @@ export class OperationFormComponent implements OnInit {
     interest: ['', [Validators.required]],
   });
 
+  constructor(
+    private operationService: OperationService,
+    private router: Router,
+    private fb: FormBuilder,
+    private accountService: AccountService,
+    private notificationSer: NotificationService
+  ) {}
+
   ngOnInit(): void {
     this.type.valueChanges.subscribe((type) => {
       if (!(type === 'loan')) {
@@ -56,6 +59,9 @@ export class OperationFormComponent implements OnInit {
         this.operationForm.get('payments')?.enable();
         this.operationForm.get('interest')?.enable();
       }
+    });
+    this.accountService.getAll().subscribe((resultArray) => {
+      this.allAccounts = resultArray;
     });
   }
 
@@ -98,7 +104,7 @@ export class OperationFormComponent implements OnInit {
 
   addOperation() {
     this.newOperation = {
-      accountNumber: this.operationForm.value.accountNum,
+      accountNumber: this.accountNum.value,
       type: this.type.value,
       amount: this.operationForm.value.amount,
       operationDate: this.operationForm.value.date,

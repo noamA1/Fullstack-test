@@ -6,10 +6,13 @@
     <mat-card-content>
         <div [formGroup]="operationForm">
             <mat-form-field appearance="standard">
-                <mat-label>Enter an accuont number</mat-label>
-                <input matInput type="number" formControlName="accountNum" required>
-                <mat-error *ngIf="operationForm.get('accountNum')?.errors">{{getErrorMessage("accountNum")}}
-                </mat-error>
+                <mat-label>Choose account number</mat-label>
+                <mat-select [formControl]="accountNum">
+                    <mat-option *ngFor="let account of allAccounts" [value]="account.accountNumber">
+                        {{account.accountNumber}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="accountNum.hasError('required')">
+                    Please choose account number</mat-error>
             </mat-form-field>
 
             <mat-form-field appearance="standard">
@@ -24,7 +27,7 @@
             </mat-form-field>
 
             <mat-form-field appearance="standard">
-                <mat-label>Enter an Amount</mat-label>
+                <mat-label>Enter an amount</mat-label>
                 <input matInput type="number" formControlName="amount" required>
                 <mat-error *ngIf="operationForm.get('amount')?.errors">{{getErrorMessage("amount")}}</mat-error>
             </mat-form-field>
