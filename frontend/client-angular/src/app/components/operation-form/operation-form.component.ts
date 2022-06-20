@@ -18,6 +18,7 @@ export class OperationFormComponent implements OnInit {
   accountNum = new FormControl('', Validators.required);
   dateError: boolean = false;
   allAccounts: Account[] = [];
+  maxDate: Date | undefined;
 
   operationForm = this.fb.group({
     amount: [
@@ -48,7 +49,9 @@ export class OperationFormComponent implements OnInit {
     private fb: FormBuilder,
     private accountService: AccountService,
     private notificationSer: NotificationService
-  ) {}
+  ) {
+    this.maxDate = new Date();
+  }
 
   ngOnInit(): void {
     this.type.valueChanges.subscribe((type) => {

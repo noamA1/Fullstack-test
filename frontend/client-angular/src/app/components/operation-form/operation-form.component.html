@@ -34,7 +34,7 @@
 
             <mat-form-field color="primary" appearance="standard">
                 <mat-label>Operation date</mat-label>
-                <input matInput [matDatepicker]="picker2" formControlName="date" [readonly]="true">
+                <input matInput [matDatepicker]="picker2" [max]="maxDate" formControlName="date" [readonly]="true">
                 <mat-datepicker-toggle matSuffix [for]="picker2" [disabled]="false">
                 </mat-datepicker-toggle>
                 <mat-datepicker #picker2 color="primary" [disabled]="false"></mat-datepicker>
